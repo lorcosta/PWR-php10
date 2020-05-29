@@ -1,0 +1,43 @@
+<?php
+  setcookie("SecondAccess", "True");
+  $nome=$_REQUEST["nome"];
+  setCookie("Nome",$nome);
+  $cognome=$_REQUEST["cognome"];
+  setCookie("Cognome",$cognome);
+ ?>
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <title>PHP 10_4</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Lorenzo Costa" >
+    <link rel=stylesheet href=fogliodistile.css>
+    <script type="text/javascript">
+    "use strict";
+      function controllo(nome, cognome){
+        var regexp=/^[A-Z]/
+        var nome=document.getElementById(nome).value
+        if(!regexp.test(nome)){
+          window.alert("Attenzione! Il nome non ha la lettera maiuscola")
+          return
+        }
+        var cognome=document.getElementById(cognome).value
+        if(!regexp.test(cognome)){
+          window.alert("Attenzione! Il cognome non ha la lettera maiuscola")
+          return
+        }
+       }
+    </script>
+  </head>
+  <body>
+      <h1>Pagina realizzata con PHP</h1>
+      <p>Autore della pagina: Lorenzo Costa</p>
+      <p>Inserisci nome e cognome</p>
+      <form id="form" action="" method="get" onsubmit="controllo(nome,cognome)">
+        <input type="text" name="nome" id="nome" onchange="controllo('nome')" maxlength="30">
+        <input type="text" name="cognome" id="cognome" onchange="controllo('cognome')" maxlength="30">
+        <input type="submit" name="submit" value="Invia">
+        <input type="reset" name="reset" value="Cancella">
+      </form>
+  </body>
+</html>
