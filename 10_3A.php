@@ -1,7 +1,7 @@
 <?php
 $nomeCookie="Country";
 $valoreCookie="IT";
-$scadenza=mktime(23,59,59,12,31,2020);
+$scadenza=mktime(23,59,59,12,31,2019);
 setcookie($nomeCookie,$valoreCookie,$scadenza);
  ?>
 <!DOCTYPE html>

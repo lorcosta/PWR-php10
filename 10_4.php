@@ -10,7 +10,17 @@
       <h1>Pagina realizzata con PHP</h1>
       <p>Autore della pagina: Lorenzo Costa</p>
       <?php
-        if(isset($_COOKIE["SecondAccess"])){
+        $regexp="/^[A-Z]/";
+        if(strlen($_COOKIE["Nome"])>30){
+          throw new \Exception("Errore: il nome non può essere più lungo di 30 caratteri", 400);
+        }elseif(strlen($_COOKIE["Cognome"])>30){
+          throw new \Exception("Errore: il cognome non può essere più lungo di 30 caratteri", 400);
+        }elseif (!preg_match($regexp,$_COOKIE["Nome"])) {
+          throw new \Exception("Errore: il nome deve iniziare con una lettera maiuscola", 400);
+        }elseif (!preg_match($regexp,$_COOKIE["Cognome"])) {
+          throw new \Exception("Errore: il cognome deve iniziare con una lettera maiuscola", 400);
+        }
+        if(isset($_COOKIE["Nome"]) && isset($_COOKIE["Cognome"])){
           echo "<p>Bentornato, caro ".$_COOKIE["Nome"]." ".$_COOKIE["Cognome"]." nel mio umile sito";
         }
        ?>

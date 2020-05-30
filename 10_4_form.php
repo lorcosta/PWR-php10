@@ -1,10 +1,3 @@
-<?php
-  setcookie("SecondAccess", "True");
-  $nome=$_REQUEST["nome"];
-  setCookie("Nome",$nome);
-  $cognome=$_REQUEST["cognome"];
-  setCookie("Cognome",$cognome);
- ?>
 <!DOCTYPE html>
 <html lang="it">
   <head>
@@ -14,18 +7,21 @@
     <link rel=stylesheet href=fogliodistile.css>
     <script type="text/javascript">
     "use strict";
-      function controllo(nome, cognome){
+      function controllo(nome){
         var regexp=/^[A-Z]/
         var nome=document.getElementById(nome).value
         if(!regexp.test(nome)){
-          window.alert("Attenzione! Il nome non ha la lettera maiuscola")
+          window.alert("Attenzione! Il campo deve iniziare con la lettera maiuscola")
           return
         }
-        var cognome=document.getElementById(cognome).value
-        if(!regexp.test(cognome)){
-          window.alert("Attenzione! Il cognome non ha la lettera maiuscola")
-          return
-        }
+       }
+       function setCookie(nome,cognome){
+         var nome=document.getElementById(nome).value
+         var expires=new Date()
+         expires.setMinutes(expires.getMinutes()+30)
+         document.cookie="Nome="+nome+";expires="+expires.toString()
+         var cognome=document.getElementById(cognome).value
+         document.cookie="Cognome="+cognome+";expires="+expires.toString()
        }
     </script>
   </head>
@@ -33,11 +29,14 @@
       <h1>Pagina realizzata con PHP</h1>
       <p>Autore della pagina: Lorenzo Costa</p>
       <p>Inserisci nome e cognome</p>
-      <form id="form" action="" method="get" onsubmit="controllo(nome,cognome)">
+      <p>Memorizzo i dati inseriti dentro un cookie (che scade dopo mezz'ora) e te li mostro sulla pagina 10_4.php</p>
+      <a href="10_4.php">Qui hai un reindirizzamento alla pagina</a>
+      <form id="form" action="10_4_form.php" method="get" onsubmit="setCookie('nome','cognome')">
         <input type="text" name="nome" id="nome" onchange="controllo('nome')" maxlength="30">
         <input type="text" name="cognome" id="cognome" onchange="controllo('cognome')" maxlength="30">
         <input type="submit" name="submit" value="Invia">
         <input type="reset" name="reset" value="Cancella">
+        <p id="writeHere"></p>
       </form>
   </body>
 </html>
