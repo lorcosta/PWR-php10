@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <title>PHP 10_5</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Lorenzo Costa" >
+    <link rel=stylesheet href=fogliodistile.css>
+    <script>
+    "use strict";
+      function controlloInput(numero){
+        var numero=document.getElementById(numero).value
+        var regexp=/^[0-9]+$/
+        if(!regexp.test(numero)){
+          window.alert("Inserire solo numeri interi e positivi")
+          return
+        }
+      }
+      function setCookies(cd,dvd,sd,usb){
+        var cd=document.getElementById(cd)
+        var dvd=document.getElementById(dvd)
+        var sd=document.getElementById(sd)
+        var usb=document.getElementById(usb)
+        var expires=new Date()
+        expires.setMinutes(expires.getMinutes()+30)
+        document.cookie="CD="+cd+";expires="+expires.toString()
+        document.cookie="DVD="+dvd+";expires="+expires.toString()
+        document.cookie="SD="+sd+";expires="+expires.toString()
+        document.cookie="USB="+usb+";expires="+expires.toString()
+      }
+    </script>
+  </head>
+  <body>
+      <h1>Pagina realizzata con JavaScript</h1>
+      <p>Autore della pagina: Lorenzo Costa</p>
+      <p>Inserisci le quantit&agrave che desideri</p>
+      <form name="form" onsubmit="setCookies('cd','dvd','sd','usb')" action="10_5_BASKET.php" method="get">
+      <table>
+        <th>Prodotto</th><th>Breve descrizione</th><th>Prezzo unitario</th><th>Quantit&agrave desiderata</th>
+        <tr>
+          <td>CD</td><td>Fantastici CD</td><td>0.5€</td><td><input type="text" id="cd" name="cd" min="0" value="0" step="1" onchange="controlloInput('cd')"></td>
+        </tr>
+        <tr>
+          <td>DVD</td><td>Ottimi DVD</td><td>1€</td><td><input type="text" id="dvd" name="dvd" min="0" value="0" step="1" onchange="controlloInput('dvd')"></td>
+        </tr>
+        <tr>
+          <td>Memoria SD</td><td>Velocissima SD</td><td>7.5€</td><td><input type="text" id="sd" name="sd" max="10" value="0" step="1" onchange="controlloInput('sd')"></td>
+        </tr>
+        <tr>
+          <td>Memoria USB</td><td>Capiente USB</td><td>5€</td><td><input type="text" id="usb" name="usb" min="0" value="0" step="1" onchange="controlloInput('usb')"></td>
+        </tr>
+      </table>
+        <input type="button" name="submit" value="Aggiungi al carrello">
+        <input type="reset" name="reset" value="Azzera">
+        <p id="showCosto"></p>
+      </form>
+  </body>
+</html>
